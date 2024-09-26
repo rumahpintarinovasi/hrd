@@ -6,6 +6,10 @@ use App\Http\Controllers\AttendanceController;
 
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
