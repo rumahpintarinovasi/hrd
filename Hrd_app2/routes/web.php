@@ -4,11 +4,16 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 
+
+
 // Login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/', function(){
+    return view('auth/login', ['title'=>'login page']);
+});
 // Routes protected by session check
 Route::middleware(['web'])->group(function () {
     Route::get('/employee', function () {
