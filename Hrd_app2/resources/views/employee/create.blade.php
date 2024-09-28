@@ -43,5 +43,7 @@
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
+    <a href="{{route('employee.index')}}" >index</a>
+    <a href="{{route('employee.view')}}" >view</a>
 </body>
 </html>

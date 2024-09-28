@@ -41,6 +41,11 @@ class EmployeeController extends Controller
         return view('employee.index', ['data' => $data, 'dateRange' => $dateRange]);
     }
 
+    public function view(){
+        $employees = Employee::all();
+        return view('employee.view', ['employees' => $employees ]);
+    }
+
     public function create() {
         return view('employee.create');
     }
