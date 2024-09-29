@@ -46,6 +46,24 @@ class EmployeeController extends Controller
         return view('employee.view', ['employees' => $employees ]);
     }
 
+    public function edit(Employee $employee){
+        return view('employee.edit', ['employee' => $employee]);
+    }
+
+    public function update(Employee $employee, Request $request){
+        $data = $request->validate([
+            'name' => 'required',
+            'position' => 'required',
+            'age' => 'required|numeric',
+            'salary' => 'required|numeric',
+            'password' => 'required'
+        ]);
+
+        $employee->update($data);
+
+        return redirect(route('employee.view'))->with('success', 'Employee Data Updated !');
+    }
+
     public function create() {
         return view('employee.create');
     }

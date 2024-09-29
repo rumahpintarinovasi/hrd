@@ -18,6 +18,7 @@
                 <th>age</th>
                 <th>Salary</th>
                 <th>Password</th>
+                <th>edit</th>
             </tr>
             @foreach ($employees as $employee)
                 <tr>
@@ -27,6 +28,9 @@
                     <th>{{$employee->age}}</th>
                     <th>{{$employee->salary}}</th>
                     <th>{{$employee->password}}</th>
+                    <th>
+                        <a href="{{route('employee.edit', ['employee' => $employee])}}">edit</a>
+                    </th>
                 </tr>
             @endforeach
     </table>

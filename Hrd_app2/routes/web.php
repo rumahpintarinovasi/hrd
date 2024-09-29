@@ -3,6 +3,9 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
+use App\Models\Employee; 
+
+use Illuminate\Http\Request;
 
 // Login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -34,6 +37,24 @@ Route::middleware(['web'])->group(function () {
         }
         return app(EmployeeController::class)->view();
     })->name('employee.view');
+
+   Route::get('/employee/{employee}/edit', function (Employee $employee) {
+        if (!Session::has('employee_id') && !Session::has('admin')) {
+            return redirect()->route('login')->withErrors('You must log in first.');
+        }
+        return app(EmployeeController::class)->edit($employee);
+    })->name('employee.edit');
+
+    Route::put('/employee/{employee}/update', function (Request $request, Employee $employee) {
+        // Check if the user is logged in as an employee or admin
+        if (!Session::has('employee_id') && !Session::has('admin')) {
+            return redirect()->route('login')->withErrors('You must log in first.');
+        }
+
+        // Pass the Request and Employee to the controller's update method
+        return app(EmployeeController::class)->update($employee, $request);
+    })->name('employee.update');
+
 
     Route::post('/employee', function () {
         if (!Session::has('employee_id') && !Session::has('admin')) {
