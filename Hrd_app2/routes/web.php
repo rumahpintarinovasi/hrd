@@ -1,11 +1,15 @@
 <?php
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Models\Employee; 
 
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\Configuration\Php;
 
 // Login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -78,3 +82,4 @@ Route::middleware(['web'])->group(function () {
         return app(AttendanceController::class)->store(request());
     })->name('attendance.store');
 });
+
