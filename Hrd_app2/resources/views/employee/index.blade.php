@@ -8,15 +8,15 @@
     <title>Employee Attendance</title>
 </head>
 <body>
-    <header class="bg-blue-900">
-        <nav class="mx-auto flex max-w-7xl justify-between p-7 " aria-label="Global">
+<header class="bg-blue-900">
+        <nav class="flex max-w-8xl justify-between p-7 " aria-label="Global">
             <div class="flex lg:flex-1 justify-start"> <!-- Tambahkan "items-center" agar teks sejajar secara vertikal dengan logo -->
                 <a href="#" class= flex items-center"> <!-- Flex untuk mengatur logo dan nama secara horizontal -->
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
+                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
                     <span class="text-lg font-bold text-white">Rumah Pintar</span> <!-- Nama perusahaan di sebelah logo -->
                 </a>
             </div>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+    <div class="flex lg:flex-1 justify-end">
       <a href="#" class="text-md font-bold leading-5 text-white">Log in <span aria-hidden="true">&rarr;</span>
     </a>
     </div>
