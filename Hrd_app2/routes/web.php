@@ -41,6 +41,13 @@ Route::middleware(['web'])->group(function () {
         return app(EmployeeController::class)->view();
     })->name('employee.view');
 
+    Route::get('/employee/salary', function () {
+        if (!Session::has('employee_id') && !Session::has('admin')) {
+            return redirect()->route('login')->withErrors('You must log in first.');
+        }
+        return app(EmployeeController::class)->salary();
+    })->name('employee.salary');
+
    Route::get('/employee/{employee}/edit', function (Employee $employee) {
         if (!Session::has('employee_id') && !Session::has('admin')) {
             return redirect()->route('login')->withErrors('You must log in first.');

@@ -14,7 +14,9 @@ class Attendance extends Model
         'photo_path', 
         'status',
         'check_in', 
-        'check_out'
+        'check_out',
+        'timelateness',   
+        'time_shortage',
     ];
 
     public function employee()
