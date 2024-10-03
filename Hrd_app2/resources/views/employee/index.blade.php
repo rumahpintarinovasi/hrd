@@ -9,87 +9,78 @@
 </head>
 <body>
 <header class="bg-blue-900">
-        <nav class="flex max-w-8xl justify-between p-7 " aria-label="Global">
-            <div class="flex lg:flex-1 justify-start"> <!-- Tambahkan "items-center" agar teks sejajar secara vertikal dengan logo -->
-                <a href="#" class= flex items-center"> <!-- Flex untuk mengatur logo dan nama secara horizontal -->
-                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
-                    <span class="text-lg font-bold text-white">Rumah Pintar</span> <!-- Nama perusahaan di sebelah logo -->
-                </a>
-            </div>
-    <div class="flex lg:flex-1 justify-end">
-      <a href="#" class="text-md font-bold leading-5 text-white">Log in <span aria-hidden="true">&rarr;</span>
-    </a>
-    </div>
-  </nav>
-
-
-  <!-- Mobile menu, show/hide based on menu open state. -->
-  <div class="lg:hidden" role="dialog" aria-modal="true">
-    <!-- Background backdrop, show/hide based on slide-over state. -->
-    <div class="fixed inset-0 z-10">
-    </div>
-    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-      <div class="flex items-center justify-between">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
-        </a>
-      </div>
-      <div class="mt-6 flow-root">
-        <div class="-my-6 divide-y divide-gray-500/10">
-          <div class="space-y-2 py-6">
-            <div class="-mx-3">
-            </div>
-            <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
-          </div>
+    <nav class="flex max-w-8xl justify-between p-7 " aria-label="Global">
+        <div class="flex lg:flex-1 justify-start">
+            <a href="#" class="flex items-center">
+                <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
+                <span class="text-lg font-bold text-white">Rumah Pintar</span>
+            </a>
         </div>
-      </div>
-    </div
-  </div>
+        <div class="flex lg:flex-1 justify-end">
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="text-md font-bold leading-5 text-white">Log out <span aria-hidden="true">&rarr;</span></button>
+        </form>
+        </div>
+    </nav>
 </header>
 
+<div class="flex">
+    <!-- Sidebar -->
+    <div class="w-64 h-screen bg-gray-800 text-white p-6">
+        <ul>
+            <li class="mb-4">
+                <a href="{{route('employee.index')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Attendance</a>
+            </li>
+            <li class="mb-4">
+                <a href="{{route('employee.view')}}"class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">View</a>
+            </li>
+            <li class="mb-4">
+                <a href="{{route('employee.create')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Add Employee</a>
+            </li>
+        </ul>
+    </div>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Position</th>
-                @foreach ($dateRange as $date)
-                    <th>{{ \Carbon\Carbon::parse($date)->format('d/m/24') }}</th>
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $employeeData)
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+        <table border="1" class="min-w-full bg-white">
+            <thead>
                 <tr>
-                    <td>{{ $employeeData['employee']->id }}</td>
-                    <td>{{ $employeeData['employee']->name }}</td>
-                    <td>{{ $employeeData['employee']->position }}</td>
-
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Position</th>
                     @foreach ($dateRange as $date)
-                        <td>
-                            @if (isset($employeeData['attendances'][$date]))
-                                @php
-                                    $attendance = $employeeData['attendances'][$date]->first();
-                                @endphp
-                                in: {{ $attendance->check_in ? \Carbon\Carbon::parse($attendance->check_in)->format('H:i') : 'N/A' }}<br>
-                                out: {{ $attendance->check_out ? \Carbon\Carbon::parse($attendance->check_out)->format('H:i') : 'N/A' }}
-                            @else
-                                
-                            @endif
-                        </td>
+                        <th>{{ \Carbon\Carbon::parse($date)->format('d/m/24') }}</th>
                     @endforeach
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($data as $employeeData)
+                    <tr>
+                        <td>{{ $employeeData['employee']->id }}</td>
+                        <td>{{ $employeeData['employee']->name }}</td>
+                        <td>{{ $employeeData['employee']->position }}</td>
+                        @foreach ($dateRange as $date)
+                            <td>
+                                @if (isset($employeeData['attendances'][$date]))
+                                    @php
+                                        $attendance = $employeeData['attendances'][$date]->first();
+                                    @endphp
+                                    in: {{ $attendance->check_in ? \Carbon\Carbon::parse($attendance->check_in)->format('H:i') : 'N/A' }}<br>
+                                    out: {{ $attendance->check_out ? \Carbon\Carbon::parse($attendance->check_out)->format('H:i') : 'N/A' }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-    <form method="POST" action="{{ route('logout') }}" style="margin-top: 20px;">
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-    <a href="{{route('employee.view')}}" >view</a>
-    <a href="{{route('employee.create')}}" >create</a>
+        <form method="POST" action="{{ route('logout') }}" style="margin-top: 20px;">
+            @csrf
+    </div>
+</div>
 </body>
 </html>
