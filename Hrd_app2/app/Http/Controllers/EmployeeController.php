@@ -13,7 +13,7 @@ class EmployeeController extends Controller
         $employees = Employee::all();  
 
         
-        $startDate = Carbon::now()->subDays(6);  
+        $startDate = Carbon::now()->startOfWeek();  
         $endDate = Carbon::now();
 
         
@@ -69,11 +69,19 @@ class EmployeeController extends Controller
     }
 
 
-    public function salary() {
-        $employees = Employee::all();  
-    
-        $startDate = Carbon::now()->subDays(6); // Mulai dari 7 hari yang lalu
-        $endDate = Carbon::now(); // Sampai hari ini
+    public function salary(Request $request) {
+        $employees = Employee::all(); 
+        
+        $filter = $request->input ('filter', 'week');
+        
+        if ($filter == 'month'){
+            $startDate = Carbon::now()->startOfMonth();
+            $endDate = Carbon::now()->endOfMonth();
+        }elseif ($filter =='week'){
+            $startDate = carbon::now()->startOfWeek();
+            $endDate = Carbon::now()->endOfWeek();
+        } 
+         
     
         $data = [];
         foreach ($employees as $employee) {
@@ -81,12 +89,12 @@ class EmployeeController extends Controller
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->get();
     
-            $totalTimeLateness = 0; // Total keterlambatan
-            $totalTimeShortage = 0; // Total kekurangan waktu
+            $totalTimeLateness = 0; 
+            $totalTimeShortage = 0; 
     
             foreach ($attendances as $attendance) {
-                $totalTimeLateness += $attendance->time_lateness ?? 0; // Menjumlahkan keterlambatan
-                $totalTimeShortage += $attendance->time_shortage ?? 0; // Menjumlahkan kekurangan waktu
+                $totalTimeLateness += $attendance->time_lateness ?? 0; 
+                $totalTimeShortage += $attendance->time_shortage ?? 0; 
             }
     
             $data[] = [
@@ -95,8 +103,10 @@ class EmployeeController extends Controller
                 'total_time_shortage' => $totalTimeShortage,
             ];
         }
+
+        $daterange = $startDate->format('d/m/y'). ' - ' . $endDate->format('d/m/y');
     
-        return view('employee.salary', ['data' => $data]);
+        return view('employee.salary', ['data' => $data, 'filter' => $filter, 'daterange' => $daterange]);
     }
     
     

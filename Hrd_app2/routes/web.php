@@ -41,11 +41,11 @@ Route::middleware(['web'])->group(function () {
         return app(EmployeeController::class)->view();
     })->name('employee.view');
 
-    Route::get('/employee/salary', function () {
+    Route::get('/employee/salary', function (Request $request) {
         if (!Session::has('employee_id') && !Session::has('admin')) {
             return redirect()->route('login')->withErrors('You must log in first.');
         }
-        return app(EmployeeController::class)->salary();
+        return app(EmployeeController::class)->salary($request);
     })->name('employee.salary');
 
    Route::get('/employee/{employee}/edit', function (Employee $employee) {
