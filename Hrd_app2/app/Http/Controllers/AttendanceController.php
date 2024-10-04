@@ -29,8 +29,8 @@ class AttendanceController extends Controller
             ->whereDate('created_at', $today)
             ->first();
 
-        $startTime = Carbon::createFromTimeString('09:00:00');  // Acuan waktu masuk
-        $endTime = Carbon::createFromTimeString('16:00:00');    // Acuan waktu keluar
+        $startTime = Carbon::createFromTimeString('09:00:00');  
+        $endTime = Carbon::createFromTimeString('16:00:00');    
 
         if ($request->status == 'check_in') {                               
             if ($attendance && $attendance->check_in) {
@@ -38,20 +38,19 @@ class AttendanceController extends Controller
             }
 
             if (!$attendance) {
-                // Hitung keterlambatan jika check-in lebih dari jam 09:00
                 $checkInTime = Carbon::now();
-                $timeLateness = 0; // Default: tidak terlambat
+                $timeLateness = 0; 
+
                 if ($checkInTime->gt($startTime)) {
                     $timeLateness = $checkInTime->diffInMinutes($startTime);
                 }
-
-                // Simpan data check-in dengan keterlambatan
+                
                 Attendance::create([
                     'employee_id' => $employeeId,
                     'photo_path' => $path,
                     'status' => 'check_in',
                     'check_in' => $checkInTime,
-                    'time_lateness' => $timeLateness, // Simpan keterlambatan
+                    'time_lateness' => $timeLateness, 
                 ]);
             } 
         } elseif ($request->status == 'check_out') {                        
@@ -63,19 +62,17 @@ class AttendanceController extends Controller
                 return redirect()->back()->withErrors(['error' => 'You have already checked out today.']);     
             }
 
-            // Hitung kekurangan waktu jika check-out sebelum jam 16:00
             $checkOutTime = Carbon::now();
-            $timeShortage = 0; // Default: tidak ada kekurangan waktu
+            $timeShortage = 0; 
             if ($checkOutTime->lt($endTime)) {
                 $timeShortage = $endTime->diffInMinutes($checkOutTime);
             }
 
-            // Update data check-out dengan kekurangan waktu
             $attendance->update([                                           
                 'photo_path' => $path,
                 'status' => 'check_out',
                 'check_out' => $checkOutTime,
-                'time_shortage' => $timeShortage, // Simpan kekurangan waktu
+                'time_shortage' => $timeShortage, 
             ]);
         } else {
             return redirect()->back()->withErrors(['error' => 'No check-in record found for today.']);

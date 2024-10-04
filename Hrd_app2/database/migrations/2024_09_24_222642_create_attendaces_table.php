@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
             $table->string('photo_path');
             $table->enum('status', ['check_in', 'check_out']);
-            $table->timestamp('check_in')->nullable();  // Add check-in time
-            $table->timestamp('check_out')->nullable(); // Add check-out time  
-            $table->integer('timelateness')->nullable(); 
+            $table->timestamp('check_in')->nullable();  
+            $table->timestamp('check_out')->nullable();  
+            $table->integer('time_lateness')->nullable(); 
             $table->integer('time_shortage')->nullable();
             $table->timestamps();
         });

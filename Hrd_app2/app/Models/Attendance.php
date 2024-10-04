@@ -15,7 +15,7 @@ class Attendance extends Model
         'status',
         'check_in', 
         'check_out',
-        'timelateness',   
+        'time_lateness',   
         'time_shortage',
     ];
 
