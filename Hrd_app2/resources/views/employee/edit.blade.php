@@ -5,39 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add an Employee</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Edit an Employee</h1>
-    <form method="POST" action="{{route('employee.update', ['employee' => $employee])}}">
+    <x-navbar></x-navbar>
+
+    <div class="flex-1 p-8 bg-gray-100">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Data</h1>    
+    <form method="POST" action="{{route('employee.update', ['employee' => $employee])}}" class="bg-white p-6 rounded shadow-md max-w-lg">
         @method('put')
         @csrf
-        <div>
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Employee name" value = "{{$employee->name}}" />
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+            <input type="text" name="name" placeholder="Employee name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value = "{{$employee->name}}" />
         </div>
 
-        <div>
-            <label>Position</label>
-            <input type="text" name="position" placeholder="Employee's position" value = "{{$employee->position}}"/>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Position</label>
+            <input type="text" name="position" placeholder="Employee's position" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value = "{{$employee->position}}"/>
         </div>
 
-        <div>
-            <label>Age</label>
-            <input type="text" name="age" placeholder="Employee's age" value = "{{$employee->age}}"/> 
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Age</label>
+            <input type="text" name="age" placeholder="Employee's age" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value = "{{$employee->age}}"/> 
         </div>
 
-        <div>
-            <label>Salary</label>
-            <input type="text" name="salary" placeholder="Employee's salary" value = "{{$employee->salary}}"/>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Salary</label>
+            <input type="text" name="salary" placeholder="Employee's salary" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value = "{{$employee->salary}}"/>
         </div>
 
-        <div>
-            <label>Password</label>
-            <input type="text" name="password" placeholder="Password For Login" value = "{{$employee->password}}"/>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+            <input type="text" name="password" placeholder="Password For Login" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value = "{{$employee->password}}"/>
         </div>
 
-        <div>
-            <input type="submit" value="update" />
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="update" />
+            Submit
+            </button>
         </div>
     </form>
 </body>

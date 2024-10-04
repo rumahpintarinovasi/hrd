@@ -4,36 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Employee Login</title>
+    @vite('resources/css/app.css')
 </head>
-<body>
-<div class="container">
-    <h1>Employee Login</h1>
-    <form action="{{ route('login') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" required>
-        </div>
+    <body class="h-screen flex items-center justify-center bg-gray-100">
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
+        <form method="POST" action="{{ route('login') }}" class="bg-white p-6 rounded shadow-md w-full max-w-sm">
+            <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Login</h1>
+            @csrf
 
-        <button type="submit" class="btn btn-primary">Login</button>
-
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                <input type="text" name="name" placeholder="Enter your name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
             </div>
-        @endif
-    </form>
-</div>
 
-</body>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                <input type="password" name="password" placeholder="Enter your password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
+
+            <button type="submit" class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+                Login
+            </button>
+
+            @if($errors->any())
+                <div class="mt-4 p-4 bg-red-200 text-red-800 rounded">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </form>
+
+    </body>
 </html>
