@@ -15,21 +15,32 @@
     </nav>
 </header>
 
+<button id="toggleSidebar" class="text-md font-bold leading-5 text-black mr-4">
+    Toggle Sidebar
+</button>
+
 <div class="flex">
     <!-- Sidebar -->
-    <div class="w-64 h-screen bg-gray-800 text-white p-6">
+    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white p-6 hidden" >
         <ul>
             <li class="mb-4">
-                <a href="{{route('employee.index')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Attendance</a>
+                <a href="{{route('employee.index')}}" class="block px-4 py-2 text-lg font-semibold {{ request()->routeIs('employee.index') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">Attendance</a>
             </li>
             <li class="mb-4">
-                <a href="{{route('employee.view')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">View</a>
+                <a href="{{route('employee.view')}}" class="block px-4 py-2 text-lg font-semibold {{ request()->routeIs('employee.view') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">View</a>
             </li>
             <li class="mb-4">
-                <a href="{{route('employee.salary')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Salary</a>
+                <a href="{{route('employee.salary')}}" class="block px-4 py-2 text-lg font-semibold {{ request()->routeIs('employee.salary') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">Salary</a>
             </li>
             <li class="mb-4">
-                <a href="{{route('employee.create')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Add Employee</a>
+                <a href="{{route('employee.create')}}" class="block px-4 py-2 text-lg font-semibold {{ request()->routeIs('employee.create') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">Add Employee</a>
             </li>
         </ul>
     </div>
+
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
