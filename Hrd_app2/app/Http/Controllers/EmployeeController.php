@@ -14,7 +14,7 @@ class EmployeeController extends Controller
 
         
         $startDate = Carbon::now()->startOfWeek();  
-        $endDate = Carbon::now();
+        $endDate = Carbon::now()->endOfWeek();
 
         
         $data = [];
