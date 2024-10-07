@@ -8,60 +8,32 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<header class="bg-blue-900">
-    <nav class="flex max-w-8xl justify-between p-7 " aria-label="Global">
-        <div class="flex lg:flex-1 justify-start">
-            <a href="#" class="flex items-center">
-                <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
-                <span class="text-lg font-bold text-white">Rumah Pintar</span>
-            </a>
-        </div>
-        <div class="flex lg:flex-1 justify-end">
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="text-md font-bold leading-5 text-white">Log out <span aria-hidden="true">&rarr;</span></button>
-        </form>
-        </div>
-    </nav>
-</header>
+    <x-navbar></x-navbar>
 
-<div class="flex">
-    <!-- Sidebar -->
-    <div class="w-64 h-screen bg-gray-800 text-white p-6">
-        <ul>
-            <li class="mb-4">
-                <a href="{{route('employee.index')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Attendance</a>
-            </li>
-            <li class="mb-4">
-                <a href="{{route('employee.view')}}"class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">View</a>
-            </li>
-            <li class="mb-4">
-                <a href="{{route('employee.create')}}" class="block px-4 py-2 text-lg font-semibold hover:bg-gray-700 rounded">Add Employee</a>
-            </li>
-        </ul>
-    </div>
+    
 
     <!-- Main Content -->
     <div class="flex-1 p-6">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Attendance Report</h1>
         <table border="1" class="min-w-full bg-white">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Position</th>
+                    <th class="px-4 py-2 bg-blue-900 text-white" style="border: 2px solid black;">ID</th>
+                    <th class="px-4 py-2 bg-blue-900 text-white" style="border: 2px solid black;">Name</th>
+                    <th class="px-4 py-2 bg-blue-900 text-white" style="border: 2px solid black;">Position</th>
                     @foreach ($dateRange as $date)
-                        <th>{{ \Carbon\Carbon::parse($date)->format('d/m/24') }}</th>
+                        <th class="px-4 py-2 bg-blue-900 text-white" style="border: 2px solid black;">{{ \Carbon\Carbon::parse($date)->format('d/m/24') }}</th>
                     @endforeach
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $employeeData)
                     <tr>
-                        <td>{{ $employeeData['employee']->id }}</td>
-                        <td>{{ $employeeData['employee']->name }}</td>
-                        <td>{{ $employeeData['employee']->position }}</td>
+                        <td class="px-4 py-2" style="border: 2px solid black;">{{ $employeeData['employee']->name }}</td>
+                        <td class="px-4 py-2" style="border: 2px solid black;">{{ $employeeData['employee']->id }}</td>
+                        <td class="px-4 py-2" style="border: 2px solid black;">{{ $employeeData['employee']->position }}</td>
                         @foreach ($dateRange as $date)
-                            <td>
+                            <td class="px-4 py-2" style="border: 2px solid black;">
                                 @if (isset($employeeData['attendances'][$date]))
                                     @php
                                         $attendance = $employeeData['attendances'][$date]->first();
