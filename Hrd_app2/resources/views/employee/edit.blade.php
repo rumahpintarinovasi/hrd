@@ -12,13 +12,6 @@
 
     <div class="flex-1 p-8 bg-gray-100">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Data</h1>   
-        <div>
-            @if (session()->has('success'))
-                <div>
-                    {{session('success')}}    
-                </div>    
-            @endif    
-        </div> 
     <form method="POST" action="{{route('employee.update', ['employee' => $employee])}}" class="bg-white p-6 rounded shadow-md max-w-lg">
         @method('put')
         @csrf
@@ -53,5 +46,22 @@
             </button>
         </div>
     </form>
+    <div>
+        @if (session()->has('success'))
+            <div>
+                {{session('success')}}    
+            </div>    
+        @endif    
+        
+        @if($errors->any())
+        <div class="mt-4 p-4 bg-red-200 text-red-800 rounded">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    </div> 
 </body>
 </html>

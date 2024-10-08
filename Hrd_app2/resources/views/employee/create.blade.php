@@ -49,7 +49,9 @@
                 </div>
             </form>
         </div>
-        @if(session('success'))
+
+    </div>
+    @if(session('success'))
             <div class="mt-4 p-4 bg-green-200 text-green-800 rounded">
                 {{ session('success') }}
             </div>
@@ -64,6 +66,5 @@
                 </ul>
             </div>
         @endif
-    </div>
 </body>
 </html>
