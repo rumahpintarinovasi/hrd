@@ -11,7 +11,14 @@
     <x-navbar></x-navbar>
 
     <div class="flex-1 p-8 bg-gray-100">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Data</h1>    
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Edit Data</h1>   
+        <div>
+            @if (session()->has('success'))
+                <div>
+                    {{session('success')}}    
+                </div>    
+            @endif    
+        </div> 
     <form method="POST" action="{{route('employee.update', ['employee' => $employee])}}" class="bg-white p-6 rounded shadow-md max-w-lg">
         @method('put')
         @csrf
