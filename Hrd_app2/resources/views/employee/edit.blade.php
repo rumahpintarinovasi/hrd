@@ -47,13 +47,13 @@
         </div>
     </form>
     <div>
-        @if (session()->has('success'))
+    @if (session()->has('success'))
             <div>
                 {{session('success')}}    
             </div>    
-        @endif    
+    @endif    
         
-        @if($errors->any())
+    @if($errors->any())
         <div class="mt-4 p-4 bg-red-200 text-red-800 rounded">
             <ul>
                 @foreach($errors->all() as $error)

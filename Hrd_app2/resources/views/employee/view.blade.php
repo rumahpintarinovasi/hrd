@@ -48,5 +48,10 @@
             </table>
         </div>
     </div>
+    @if (session()->has('success'))
+            <div>
+                {{session('success')}}    
+            </div>    
+    @endif  
 </body>
 </html>
