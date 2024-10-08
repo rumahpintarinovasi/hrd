@@ -52,6 +52,7 @@
 
         <form method="POST" action="{{ route('logout') }}" style="margin-top: 20px;">
             @csrf
+        </form>
     </div>
 </div>
 </body>

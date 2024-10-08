@@ -56,14 +56,20 @@ Route::middleware(['web'])->group(function () {
     })->name('employee.edit');
 
     Route::put('/employee/{employee}/update', function (Request $request, Employee $employee) {
-        // Check if the user is logged in as an employee or admin
         if (!Session::has('employee_id') && !Session::has('admin')) {
             return redirect()->route('login')->withErrors('You must log in first.');
         }
 
-        // Pass the Request and Employee to the controller's update method
         return app(EmployeeController::class)->update($employee, $request);
     })->name('employee.update');
+
+    Route::delete('/employee/{employee}/destroy', function (Employee $employee) {
+        if (!Session::has('employee_id') && !Session::has('admin')) {
+            return redirect()->route('login')->withErrors('You must log in first.');
+        }
+
+        return app(EmployeeController::class)->destroy($employee);
+    })->name('employee.destroy');
 
 
     Route::post('/employee', function () {

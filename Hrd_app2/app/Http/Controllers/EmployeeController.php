@@ -64,6 +64,13 @@ class EmployeeController extends Controller
         return redirect(route('employee.view'))->with('success', 'Employee Data Updated !');
     }
 
+    public function destroy(Employee $employee){
+
+        $employee->delete();
+
+        return redirect(route('employee.view'))->with('success', 'Employee Data Deleted !');
+    }
+
     public function create() {
         return view('employee.create');
     }
