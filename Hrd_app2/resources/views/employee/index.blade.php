@@ -38,8 +38,16 @@
                                     @php
                                         $attendance = $employeeData['attendances'][$date]->first();
                                     @endphp
+                                <div>
                                     in: {{ $attendance->check_in ? \Carbon\Carbon::parse($attendance->check_in)->format('H:i') : 'N/A' }}<br>
                                     out: {{ $attendance->check_out ? \Carbon\Carbon::parse($attendance->check_out)->format('H:i') : 'N/A' }}
+
+                                    @if($attendance->photo_path)
+                                        <img src="{{asset('storage/'. $attendance->photo_path)}}" alt="Attendance Photo" class="w-16 h-16 object-cover mt-2">
+                                    @else
+                                        No photo
+                                    @endif
+                                </div>
                                 @else
                                     N/A
                                 @endif
