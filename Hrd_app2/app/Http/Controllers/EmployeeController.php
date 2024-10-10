@@ -80,6 +80,7 @@ class EmployeeController extends Controller
         $employees = Employee::all(); 
         
         $filter = $request->input ('filter', 'week');
+        $fine = $request->input('fine', 0);
         
         if ($filter == 'month'){
             $startDate = Carbon::now()->startOfMonth();
@@ -103,21 +104,24 @@ class EmployeeController extends Controller
                 $totalTimeLateness += $attendance->time_lateness ?? 0; 
                 $totalTimeShortage += $attendance->time_shortage ?? 0; 
             }
+
+            $totalFine = ($totalTimeLateness + $totalTimeShortage) * $fine;
+            $finalSalary = $employee->salary - $totalFine;
     
             $data[] = [
                 'employee' => $employee,
                 'total_time_lateness' => $totalTimeLateness,
                 'total_time_shortage' => $totalTimeShortage,
+                'total_fine' => $totalFine,  
+                'final_salary' => $finalSalary
             ];
         }
 
         $daterange = $startDate->format('d/m/y'). ' - ' . $endDate->format('d/m/y');
     
-        return view('employee.salary', ['data' => $data, 'filter' => $filter, 'daterange' => $daterange]);
+        return view('employee.salary', ['data' => $data, 'filter' => $filter, 'daterange' => $daterange, 'fine' => $fine]);
     }
     
-    
-
     public function store(Request $request) {
         $data = $request->validate([
             'name' => 'required',
