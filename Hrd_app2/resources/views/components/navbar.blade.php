@@ -1,4 +1,4 @@
-<header class="bg-blue-900">
+<header class="" style="background-color: rgb(15, 28, 61);">
     <nav class="flex max-w-8xl justify-between p-7 " aria-label="Global">
         <div class="flex lg:flex-1 justify-start">
             <a href="{{route('employee.index')}}" class="flex items-center">
@@ -15,13 +15,9 @@
     </nav>
 </header>
 
-<button id="toggleSidebar" class="text-md font-bold leading-5 text-black mr-4">
-    Toggle Sidebar
-</button>
-
 <div class="flex">
     <!-- Sidebar -->
-    <div id="sidebar" class="w-64 h-screen bg-gray-800 text-white p-6 hidden" >
+    <div id="sidebar" class="w-64 h-screen bg-gray-900 bg-opacity-80 text-white p-6" >
         <ul>
             <li class="mb-4">
                 <a href="{{route('employee.index')}}" class="block px-4 py-2 text-lg font-semibold {{ request()->routeIs('employee.index') ? 'bg-gray-700' : 'hover:bg-gray-700' }}">Attendance</a>
@@ -37,10 +33,3 @@
             </li>
         </ul>
     </div>
-
-    <script>
-        document.getElementById('toggleSidebar').addEventListener('click', function() {
-            var sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('hidden');
-        });
-    </script>
