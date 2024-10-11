@@ -7,8 +7,9 @@
     <title>Attendance</title>
     @vite('resources/css/app.css')
 </head>
-<body class="h-screen bg-gray-100 flex items-center justify-center">
-    <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
+<body class="h-screen flex items-center justify-center" style="background-image: url('{{ asset('images/login_wallpaper.jpg') }}'); background-size: cover; background-position: center;">
+
+    <div class="bg-gray-200 bg-opacity-55 p-8 rounded-lg shadow-md w-full max-w-lg">
         <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Absensi Rumah Pintar</h1>
 
         @if(Session::has('employee_id'))
@@ -16,7 +17,7 @@
                 @csrf
                 <div class="mb-4">
                     <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Upload Photo</label>
-                    <input type="file" name="photo" class="block w-full text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" required>
+                    <input type="file" name="photo" class="block w-full text-gray-700 border rounded-lg py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-white bg-opacity-60" required>
                 </div>
 
                 <div class="mb-4">
@@ -35,22 +36,21 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" class="bg-blue-900 bg-opacity-90 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full">
                     Submit
                 </button>
             </form>
 
             <form method="POST" action="{{ route('logout') }}" class="mt-4">
                 @csrf
-                <button type="submit" class="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full">
                     Logout
                 </button>
             </form>
         @else
             <div class="mb-4 p-4 bg-red-200 text-red-800 rounded">You must be logged in to submit attendance.</div>
-            <a href="{{ route('login') }}" class="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center mb-4">Login</a>
+            <a href="{{ route('login') }}" class="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg text-center mb-4">Login</a>
         @endif
-
 
         @if(session('success'))
             <div class="mt-4 p-4 bg-green-200 text-green-800 rounded">
