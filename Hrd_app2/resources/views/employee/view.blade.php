@@ -7,11 +7,11 @@
     @vite('resources/css/app.css')
     <title>Employee Attendance</title>
 </head>
-<body style="position: relative; overflow: auto;">
+<body style="margin: 0; padding: 0; height: 100vh; overflow: hidden;">
     <div style="background-image: url('{{ asset('images/login_wallpaper.jpg') }}'); background-size: cover; background-position: center; filter: blur(3px); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
     <x-navbar></x-navbar>
 
-    <div class="flex-1 p-6" style="height: 100vh; overflow-y: auto;">
+    <div class="flex-1 p-6" style="margin-top: 10px; height: 90vh; overflow-y: auto; padding: 1.5rem; position: relative;">
         <h1 class="text-2xl font-bold text-black mb-6">Employee List</h1>
         <table border="1" class="min-w-full">
             <thead>

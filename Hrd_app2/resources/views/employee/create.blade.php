@@ -7,7 +7,7 @@
     <title>Add an Employee</title>
     @vite('resources/css/app.css')
 </head>
-<body style="position: relative; overflow:auto">
+<body style="position: relative; overflow:hidden">
     <div style="background-image: url('{{ asset('images/login_wallpaper.jpg') }}'); background-size: cover; background-position: center; filter: blur(3px); position: absolute; top: 0; left: 0; margin:auto; width: 100%; height: 100%; z-index: -1; "></div>
     <x-navbar></x-navbar>
 
