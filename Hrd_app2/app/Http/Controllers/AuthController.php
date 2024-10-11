@@ -43,7 +43,7 @@ class AuthController extends Controller
     Session::forget('employee_id');
     Session::forget('employee_name');
     Session::forget('admin');
-    return redirect()->route('login')->with('success', 'Logged out successfully.');
+    return redirect()->route('login');
     }
 
 }
