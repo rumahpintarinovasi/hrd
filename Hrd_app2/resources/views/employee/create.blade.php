@@ -9,10 +9,10 @@
 </head>
 <body style="position: relative; overflow:hidden">
     <div style="background-image: url('{{ asset('images/login_wallpaper.jpg') }}'); background-size: cover; background-position: center; filter: blur(3px); position: absolute; top: 0; left: 0; margin:auto; width: 100%; height: 100%; z-index: -1; "></div>
-    <x-navbar></x-navbar>
+    <x-navbar class="navbar" style="position: fixed; width: 100%; z-index: 10;"></x-navbar>
 
     <!-- Main Content -->
-    <div class="flex-1 p-6">
+    <div class="flex-1" style="margin-top: 10px; height: calc(90vh - 40px); overflow-y: auto; padding: 1.5rem; position: relative;">
         <h1 class="text-2xl font-bold text-black mb-6">Input New Employee Data</h1>
 
         <form method="POST" action="{{ route('employee.store') }}" class="bg-white bg-opacity-40 p-6 rounded shadow-md max-w-lg">
