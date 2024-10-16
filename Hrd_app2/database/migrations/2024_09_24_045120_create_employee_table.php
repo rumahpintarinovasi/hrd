@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('position');
             $table->integer('age');
-            $table->decimal('salary');
+            $table->integer('salary');
             $table->string('password');
             $table->timestamps();
         });
