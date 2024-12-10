@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 <body style="margin: 0; padding: 0; height: 100vh; overflow: hidden;">
-    <div style="background-image: url('{{ asset('images/login_wallpaper.jpg') }}'); background-size: cover; background-position: center; filter: blur(3px); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+    <div style="background-image: url('{{ asset('images/login_wallpaper.jp) }}'); background-size: cover; background-position: center; filter: blur(3px); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
     
     <x-navbar class="navbar" style="position: fixed; width: 100%; z-index: 10;"></x-navbar>
 
